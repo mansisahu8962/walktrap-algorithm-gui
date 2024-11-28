@@ -4,20 +4,13 @@ import matplotlib.pyplot as plt
 import os
 import subprocess
 
-# Function to open a PDF file
-def open_pdf(file_name):
+# Function to open a PDF file from Google Drive
+def open_pdf_from_google_drive(file_id):
     """
-    Open the specified PDF file.
+    Generate a direct download link from Google Drive for the provided file ID.
     """
-    try:
-        if os.name == 'nt':  # For Windows
-            os.startfile(file_name)
-        elif os.name == 'posix':  # For macOS/Linux
-            subprocess.run(['open', file_name], check=True)
-        else:
-            subprocess.run(['xdg-open', file_name], check=True)
-    except Exception as e:
-        st.error(f"Could not open file: {e}")
+    pdf_url = f"https://drive.google.com/uc?export=download&id={file_id}"
+    st.markdown(f"Click [here]( {pdf_url} ) to download the PDF.")
 
 # Function to execute the Walktrap algorithm
 def execute_walktrap(n, edges):
@@ -60,11 +53,14 @@ st.title("Walktrap Algorithm GUI")
 
 # PDF Section
 st.subheader("Documentation")
+# Use the Google Drive file IDs in place of file names
 if st.button("Open Introduction PDF"):
-    open_pdf("Introduction.pdf")
+    # Replace 'FILE_ID' with your actual Google Drive file ID
+    open_pdf_from_google_drive("1CAkOzXQ64m3M1IPGJ3vG3qKPDMbnIxYV")
 
 if st.button("Open Details and Terminologies PDF"):
-    open_pdf("Details.pdf")
+    # Replace 'FILE_ID' with your actual Google Drive file ID for Details PDF
+    open_pdf_from_google_drive("10iNfcGGkEqqJsX-ArnZ-g-OA0jy0ENTJ")  # Change this if the file ID is different for the second PDF
 
 # Walktrap Algorithm Section
 st.subheader("Execute Walktrap Algorithm")
